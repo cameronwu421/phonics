@@ -7,6 +7,7 @@ import 'dotenv/config';
 import express from 'express';
 import { corsMiddleware } from './middleware/cors.js';
 import healthRouter from './routes/health.js';
+import lessonsRouter from './routes/lessons.js';
 import { closePool } from './db.js';
 
 const PORT = Number(process.env['PORT'] ?? '3001');
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/health', healthRouter);
+app.use('/api/lessons', lessonsRouter);
 
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
 app.use((_req, res) => {
