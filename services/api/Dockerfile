@@ -21,10 +21,8 @@ COPY tsconfig.base.json ./
 COPY packages/shared/ ./packages/shared/
 COPY services/api/ ./services/api/
 
-# Build shared types first, then API
-RUN cd packages/shared && npm run build || (echo "Shared build failed"; ls -la; cat package.json; exit 1)
-RUN cd services/api && npm run build || (echo "API build failed"; ls -la; cat package.json; exit 1)
-RUN ls -la services/api/dist/ || echo "No dist folder found"
+# Build all workspaces from root
+RUN npm run build
 
 # ─── Stage 2: Runtime ─────────────────────────────────────────────────────────
 FROM node:22-alpine AS runtime
