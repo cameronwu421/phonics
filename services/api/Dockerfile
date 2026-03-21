@@ -39,7 +39,7 @@ COPY packages/shared/package.json ./packages/shared/
 COPY services/api/package.json ./services/api/
 
 # Install production dependencies only (entire tree, but no devDeps)
-RUN npm ci --omit=dev --omit=optional
+RUN npm ci --omit=dev --omit=optional --legacy-peer-deps
 
 # Copy compiled output from builder
 COPY --from=builder /app/packages/shared/dist ./packages/shared/dist
