@@ -13,8 +13,8 @@ COPY package.json package-lock.json* ./
 COPY packages/shared/package.json ./packages/shared/
 COPY services/api/package.json ./services/api/
 
-# Install all dependencies (including devDeps for build)
-RUN npm ci --workspace=services/api --workspace=packages/shared
+# Install ALL dependencies (root + workspaces, including devDeps)
+RUN npm ci
 
 # Copy source files
 COPY tsconfig.base.json ./
@@ -22,8 +22,8 @@ COPY packages/shared/ ./packages/shared/
 COPY services/api/ ./services/api/
 
 # Build shared types first, then API
-RUN npm run build --workspace=packages/shared
-RUN npm run build --workspace=services/api
+RUN cd packages/shared && npm run build
+RUN cd services/api && npm run build
 
 # ─── Stage 2: Runtime ─────────────────────────────────────────────────────────
 FROM node:22-alpine AS runtime
@@ -38,8 +38,8 @@ COPY package.json package-lock.json* ./
 COPY packages/shared/package.json ./packages/shared/
 COPY services/api/package.json ./services/api/
 
-# Install production dependencies only
-RUN npm ci --omit=dev --workspace=services/api --workspace=packages/shared
+# Install production dependencies only (entire tree, but no devDeps)
+RUN npm ci --omit=dev --omit=optional
 
 # Copy compiled output from builder
 COPY --from=builder /app/packages/shared/dist ./packages/shared/dist
