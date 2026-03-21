@@ -38,7 +38,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "phonics-app-placeholder"
+        "projectId": "YOUR_EAS_PROJECT_ID"
       }
     }
   }

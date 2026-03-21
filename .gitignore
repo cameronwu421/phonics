@@ -6,6 +6,10 @@
 .env
 .env.local
 .env.*.local
+google-play-service-account.json
+*.p8
+*.p12
+*.mobileprovision
 
 # ─── Dependencies ────────────────────────────────────────────────────────────
 node_modules/
