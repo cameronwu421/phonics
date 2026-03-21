@@ -14,7 +14,7 @@ COPY packages/shared/package.json ./packages/shared/
 COPY services/api/package.json ./services/api/
 
 # Install ALL dependencies (root + workspaces, including devDeps)
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copy source files
 COPY tsconfig.base.json ./
