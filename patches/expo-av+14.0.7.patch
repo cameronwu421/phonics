@@ -1,0 +1,13 @@
+diff --git a/android/CMakeLists.txt b/android/CMakeLists.txt
+index 1234567..abcdefg 100644
+--- a/android/CMakeLists.txt
++++ b/android/CMakeLists.txt
+@@ -43,7 +43,7 @@ target_link_libraries(
+         ${PACKAGE_NAME}
+         ${LOG_LIB}
+         fbjni::fbjni
+         ReactAndroid::jsi
+-        ReactAndroid::reactnativejni
++        ReactAndroid::reactnative
+         android
+ )
